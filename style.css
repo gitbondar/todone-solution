@@ -1,0 +1,32 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+li {
+  min-width: 800px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+hr {
+  width: 80%;
+}
