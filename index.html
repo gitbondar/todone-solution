@@ -10,8 +10,13 @@
     <div class="app">
       <h1>Todone</h1>
       <section class="form">
-        <label for="todo-input">Add to your todo list!</label>
-        <input class="todo-input "type="text" name="todo-input">
+        <label for="todo-input">Type in your todo.</label>
+        <input class="todo-input" type="text" name="todo-input">
+        <label for="priority">Priority (optional).</label>
+        <select class="priority-pulldown" name="priority">
+          <option value="1">Low</option>
+          <option value="2">High</option>
+        </select>
         <button class="add-todo">ADD</button>
         <hr>
       </section>
