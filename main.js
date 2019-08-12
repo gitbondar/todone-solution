@@ -1,7 +1,8 @@
-function getCurrentDateAndTime() {
-  return new Date().toLocaleString();
-}
-
+// Some event handlers.
+const deleteButton = document.querySelector('.delete-completed-todos');
+deleteButton.onclick = handleDelete;
+const addButton = document.querySelector('.add-todo');
+addButton.onclick = addToList;
 
 // Our new array of objects!
 let todos = [
@@ -25,12 +26,16 @@ let todos = [
   },
 ]
 
-// TODO: uncomment below once you have printList and printTodo working!
+// Populate the dom with our example todos.
 printList();
 
+// Get the current date and time.
+function getCurrentDateAndTime() {
+  return new Date().toLocaleString();
+}
 
+// Print a todo to the DOM.
 function printTodo(todo, todoIndex) {
-
   const ol = document.querySelector('.todo-list');
   
   const li = document.createElement('li');
@@ -53,39 +58,28 @@ function printTodo(todo, todoIndex) {
   ol.appendChild(li);
 }
 
-// A function that prints everything on our todo list, INDIVIDUALLY.
-// Make SURE to use the above function!
+// Prints everything from our data to the DOM.
 function printList() {
   let i = 0;
   while (i < todos.length) {
-    // printTodo(todos[i], dates[i], i);
-    // Or, for tuples:
     printTodo(todos[i], i);
 
     i = i + 1;
   }
 }
 
+// Add a todo to the data.
 function addTodo(newTodo) {
   todos.push(newTodo);
 }
 
-// A function that removes an item at a given index from our todo list.
-function removeTodo(i) {
-  todos.splice(i, 1);
-}
-
-
-const addButton = document.querySelector('.add-todo');
-addButton.onclick = addToList;
-
+// Add the user's input as a todo into the data and the dom.
 function addToList() {
   const inputBox = document.querySelector('.todo-input');
   const todoName = inputBox.value;
   const todoDate = getCurrentDateAndTime();
   const priorityInput = document.querySelector('.priority-pulldown');
   const todoPriority = Number(priorityInput.value);
-  console.log(todoPriority);
   const newTodo = {
     name: todoName,
     completed: false,
@@ -94,15 +88,18 @@ function addToList() {
   }
   addTodo(newTodo);
   printTodo(newTodo, todos.length - 1);
+
   inputBox.value = '';
 }
 
-
+// Toggle a clicked todo.
 function handleMark(event) {
   // Get the li
   const li = event.target.parentNode;
 
   // Get the li's index.
+
+  // Method 1:
   // const ul = document.querySelector('.todo-list');
   // const listItems = Array.from(ul.childNodes);
   // const index = listItems.indexOf(li);
@@ -115,14 +112,8 @@ function handleMark(event) {
   markComplete(index);
 }
 
-
+// Toggle a given todo's completeness in the data.
 function markComplete(index) {
-  // if (completed[index] === true) {
-  //   completed[index] = false;
-  // } else {
-  //   completed[index] = true;
-  // }
-  // Or, for tuples:
   if (todos[index].completed === true) {
     todos[index].completed = false;
   } else {
@@ -130,6 +121,7 @@ function markComplete(index) {
   }
 }
 
+// Print the appropriate completeness mark to the dom for a given todo.
 function printMark(index) {
   const li = document.querySelector(`li:nth-child(${index + 1})`);
   
@@ -140,9 +132,7 @@ function printMark(index) {
   }
 }
 
-const deleteButton = document.querySelector('.delete-completed-todos');
-deleteButton.onclick = handleDelete;
-
+// Delete an item from the data and dom.
 function handleDelete() {
   const newTodos = [];
 
@@ -157,13 +147,12 @@ function handleDelete() {
   printList();
 }
 
-
+// Remove all todos from the dom.
 function clearList() {
   // Grab the todo list ul and put it in a variable
   const list = document.querySelector('.todo-list');
 
   // Remove all children of that list.
-  // My favorite way uses `.hasChildNodes()` and `.remove()` and `.firstChild`, but there are other ways if you wanna research them instead!
   while (list.hasChildNodes()) {
     list.firstChild.remove();
   }
